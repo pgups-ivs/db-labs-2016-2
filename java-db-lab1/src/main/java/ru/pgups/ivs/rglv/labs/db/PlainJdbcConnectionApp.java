@@ -1,6 +1,10 @@
 package ru.pgups.ivs.rglv.labs.db;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class PlainJdbcConnectionApp {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
