@@ -2,7 +2,7 @@ package ru.pgups.ivs.rglv.labs.db.model;
 
 import java.util.Date;
 
-public class Rental {
+public class Rental implements Identifiable {
     private long id;
     private Date rentalDate;
     private Date returnDate;

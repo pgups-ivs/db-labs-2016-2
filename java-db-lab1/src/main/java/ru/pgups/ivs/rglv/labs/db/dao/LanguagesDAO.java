@@ -6,7 +6,7 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LanguagesDAO extends AbstractDAO<Language> {
+public class LanguagesDAO extends AbstractCachingDAO<Language> {
     public LanguagesDAO(DataSource dataSource) {
         super(dataSource, "SELECT * FROM language ORDER BY name", "SELECT * FROM language WHERE language_id = ?");
     }

@@ -1,6 +1,6 @@
 package ru.pgups.ivs.rglv.labs.db.model;
 
-public class Address {
+public class Address implements Identifiable {
     private long id;
     private String address;
     private String address2;

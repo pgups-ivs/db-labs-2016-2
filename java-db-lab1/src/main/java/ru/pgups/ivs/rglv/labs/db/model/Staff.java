@@ -1,6 +1,6 @@
 package ru.pgups.ivs.rglv.labs.db.model;
 
-public class Staff extends Person {
+public class Staff extends Person implements Identifiable {
     private String username;
     private String password;
 

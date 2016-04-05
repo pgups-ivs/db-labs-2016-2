@@ -1,6 +1,6 @@
 package ru.pgups.ivs.rglv.labs.db.model;
 
-public class Inventory {
+public class Inventory implements Identifiable {
     private long id;
 
     private Film film;

@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class FilmCategoriesDAO extends AbstractDAO<FilmCategory> {
+public class FilmCategoriesDAO extends AbstractCachingDAO<FilmCategory> {
     public static final String SELECT_BY_ID = "SELECT * FROM CATEGORY WHERE id = ?";
     public static final String SELECT_ALL = "SELECT * FROM CATEGORY ORDER BY name";
     public static final String SELECT_FOR_FILM = "SELECT C.* FROM CATEGORY c JOIN FILM_CATEGORY FC USING(category_id) WHERE film_id = ?";

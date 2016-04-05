@@ -1,6 +1,6 @@
 package ru.pgups.ivs.rglv.labs.db.model;
 
-public class Country {
+public class Country implements Identifiable {
     private long id;
     private String country;
 

@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ActorsDAO extends AbstractDAO<Actor> {
+public class ActorsDAO extends AbstractCachingDAO<Actor> {
     public static final String SELECT_BY_ID = "SELECT * FROM ACTOR WHERE id = ?";
     public static final String SELECT_ALL = "SELECT * FROM ACTOR ORDER BY last_name, first_name";
     public static final String SELECT_FOR_FILM = "SELECT A.* FROM ACTOR a JOIN film_actor fa USING (actor_id) WHERE film_id = ?";

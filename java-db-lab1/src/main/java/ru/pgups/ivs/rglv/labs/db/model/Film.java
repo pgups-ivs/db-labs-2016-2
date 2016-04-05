@@ -2,7 +2,7 @@ package ru.pgups.ivs.rglv.labs.db.model;
 
 import java.util.List;
 
-public class Film {
+public class Film implements Identifiable {
     private long id;
 
     private String title;

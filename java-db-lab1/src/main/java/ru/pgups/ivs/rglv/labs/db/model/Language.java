@@ -1,6 +1,6 @@
 package ru.pgups.ivs.rglv.labs.db.model;
 
-public class Language {
+public class Language implements Identifiable {
     private long id;
     private String language;
 

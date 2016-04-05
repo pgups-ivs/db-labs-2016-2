@@ -1,6 +1,6 @@
 package ru.pgups.ivs.rglv.labs.db.model;
 
-public class FilmCategory {
+public class FilmCategory implements Identifiable {
     private long id;
     private String name;
 

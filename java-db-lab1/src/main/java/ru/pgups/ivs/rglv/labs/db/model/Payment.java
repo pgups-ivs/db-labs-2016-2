@@ -3,7 +3,7 @@ package ru.pgups.ivs.rglv.labs.db.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Payment {
+public class Payment implements Identifiable {
     private long id;
     private Customer customer;
     private Staff staff;

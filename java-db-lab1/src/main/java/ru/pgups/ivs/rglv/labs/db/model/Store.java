@@ -1,6 +1,6 @@
 package ru.pgups.ivs.rglv.labs.db.model;
 
-public class Store {
+public class Store implements Identifiable {
     private long id;
     private Address address;
     private Staff manager;

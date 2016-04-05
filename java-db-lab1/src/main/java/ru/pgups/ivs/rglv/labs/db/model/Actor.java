@@ -1,6 +1,6 @@
 package ru.pgups.ivs.rglv.labs.db.model;
 
-public class Actor {
+public class Actor implements Identifiable {
     private long id;
     private String firstName;
     private String lastName;
