@@ -12,7 +12,7 @@ public class PlainJdbcConnectionApp {
         try (
                 Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost/dvd", "postgres", "postgres");
                 Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM actors ORDER BY last_name, first_name")
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM actor ORDER BY last_name, first_name")
         ) {
             while (resultSet.next()) {
                 System.out.println(

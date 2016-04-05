@@ -42,17 +42,40 @@ public abstract class AbstractDAO<T> implements DAO<T> {
 
     @Override
     public List<T> list() {
+        return list(GET_ALL_QUERY);
+    }
+
+    public List<T> list(String query) {
         List<T> ret = new LinkedList<>();
 
-        try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_QUERY);
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)
+        ) {
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                ret.add(readObject(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
+
+    protected List<T> listWithIdParameter(String query, long id) {
+        List<T> ret = new LinkedList<>();
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ) {
+            preparedStatement.setLong(1, id);
 
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 ret.add(readObject(rs));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

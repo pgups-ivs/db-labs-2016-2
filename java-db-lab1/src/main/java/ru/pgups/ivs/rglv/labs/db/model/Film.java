@@ -10,6 +10,8 @@ public class Film {
     private int releaseYear;
     private int lenght;
     private int rentalDuration;
+    private double rentalRate;
+    private double replacementCost;
     private String mpaaRating;
 
     private List<String> specialFeatures;
@@ -64,6 +66,22 @@ public class Film {
 
     public void setRentalDuration(int rentalDuration) {
         this.rentalDuration = rentalDuration;
+    }
+
+    public double getRentalRate() {
+        return rentalRate;
+    }
+
+    public void setRentalRate(double rentalRate) {
+        this.rentalRate = rentalRate;
+    }
+
+    public double getReplacementCost() {
+        return replacementCost;
+    }
+
+    public void setReplacementCost(double replacementCost) {
+        this.replacementCost = replacementCost;
     }
 
     public String getMpaaRating() {

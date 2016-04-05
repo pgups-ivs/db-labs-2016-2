@@ -3,7 +3,10 @@ package ru.pgups.ivs.rglv.labs.db;
 import org.postgresql.ds.PGPoolingDataSource;
 import ru.pgups.ivs.rglv.labs.db.dao.ActorsDAO;
 import ru.pgups.ivs.rglv.labs.db.dao.FilmCategoriesDAO;
+import ru.pgups.ivs.rglv.labs.db.dao.FilmsDAO;
+import ru.pgups.ivs.rglv.labs.db.dao.LanguagesDAO;
 import ru.pgups.ivs.rglv.labs.db.model.Actor;
+import ru.pgups.ivs.rglv.labs.db.model.Language;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -32,6 +35,7 @@ public class DataSourceAndDaoApp
 
         ActorsDAO actorsDAO = new ActorsDAO(dataSource);
         FilmCategoriesDAO categoriesDAO = new FilmCategoriesDAO(dataSource);
+        LanguagesDAO languagesDAO = new LanguagesDAO(dataSource);
 
         System.out.println("= = = = = Actors list = = = = = =");
         List<Actor> actors = actorsDAO.list();
@@ -47,5 +51,18 @@ public class DataSourceAndDaoApp
                 .forEach(filmCategory ->
                         System.out.println(String.format("%s (id: %03d)", filmCategory.getName(), filmCategory.getId()))
                 );
+
+        System.out.println("= = = = = Languages list = = = = = =");
+        languagesDAO.list().stream().forEach(language -> System.out.println(String.format("%s (id: %03d)", language.getLanguage(), language.getId())));
+
+
+        FilmsDAO filmDAO = new FilmsDAO(dataSource);
+
+        filmDAO.setActorsDAO(actorsDAO);
+        filmDAO.setCategoriesDAO(categoriesDAO);
+        filmDAO.setLanguageDAO(languagesDAO);
+
+        System.out.println("= = = = = Films list = = = = = =");
+        filmDAO.list().stream().forEach(film -> System.out.println(String.format("%s (id: %03d) in %s", film.getTitle(), film.getId(), film.getLanguage().getLanguage())));
     }
 }
