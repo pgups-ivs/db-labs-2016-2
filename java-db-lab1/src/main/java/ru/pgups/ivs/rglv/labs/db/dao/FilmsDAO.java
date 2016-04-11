@@ -1,8 +1,10 @@
 package ru.pgups.ivs.rglv.labs.db.dao;
 
 import ru.pgups.ivs.rglv.labs.db.model.Film;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.sql.DataSource;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -12,7 +14,10 @@ public class FilmsDAO extends AbstractDAO<Film> {
     private LanguagesDAO languageDAO;
 
     public FilmsDAO(DataSource dataSource) {
-        super(dataSource, "SELECT * FROM FILM ORDER BY title", "SELECT * FROM FILM WHERE FILM_ID=?");
+        super(dataSource, "SELECT * FROM FILM ORDER BY title", "SELECT * FROM FILM WHERE FILM_ID=?",
+                "INSERT INTO film VALUES(?,?)",
+                "UPDATE FILM set ... WHERE film_id = ?",
+                "DELETE FROM film WHERE film_id = ?");
     }
 
     @Override
@@ -35,6 +40,16 @@ public class FilmsDAO extends AbstractDAO<Film> {
         f.setActors(actorsDAO.listForFilm(f.getId()));
 
         return f;
+    }
+
+    @Override
+    public long save(Film obj) throws SQLException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    protected int writeObject(Film obj, PreparedStatement ps, int idx) throws SQLException {
+        throw new UnsupportedOperationException();
     }
 
     public FilmCategoriesDAO getCategoriesDAO() {

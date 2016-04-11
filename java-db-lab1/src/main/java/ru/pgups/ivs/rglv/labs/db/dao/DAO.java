@@ -9,5 +9,7 @@ public interface DAO<T extends Object> {
 
     List<T> list();
 
-    T readObject(ResultSet rs) throws SQLException;
+    long save(T obj) throws SQLException;
+
+    void delete(long id) throws SQLException;
 }

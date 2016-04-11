@@ -4,6 +4,18 @@ public class FilmCategory implements Identifiable {
     private long id;
     private String name;
 
+    public FilmCategory() {
+    }
+
+    public FilmCategory(String name) {
+        this.name = name;
+    }
+
+    public FilmCategory(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }
