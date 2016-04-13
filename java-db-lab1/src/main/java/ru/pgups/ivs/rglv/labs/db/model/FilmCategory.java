@@ -31,4 +31,16 @@ public class FilmCategory implements Identifiable {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FilmCategory that = (FilmCategory) o;
+
+        if (id != that.id) return false;
+        return name.equals(that.name);
+
+    }
 }
