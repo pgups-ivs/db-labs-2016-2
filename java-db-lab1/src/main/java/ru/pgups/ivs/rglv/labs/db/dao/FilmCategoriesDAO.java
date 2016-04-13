@@ -3,6 +3,7 @@ package ru.pgups.ivs.rglv.labs.db.dao;
 import ru.pgups.ivs.rglv.labs.db.model.FilmCategory;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,5 +37,37 @@ public class FilmCategoriesDAO extends AbstractCachingDAO<FilmCategory> {
 
     public List<FilmCategory> listForFilm(long id) {
         return this.listWithIdParameter(SELECT_FOR_FILM, id);
+    }
+
+    public void saveFilmCategories(long filmId, List<FilmCategory> categories) {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM film_category WHERE film_id = ?");
+            ps.setLong(1, filmId);
+            ps.executeUpdate();
+
+            ps.close();
+
+            ps = connection.prepareStatement("INSERT INTO film_category (film_id, category_id) VALUES (?,?)");
+            for (FilmCategory category : categories) {
+                ps.setLong(1, filmId);
+                ps.setLong(2, category.getId());
+                ps.addBatch();
+            }
+            ps.executeBatch();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteForFilm(long filmId) {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM film_category WHERE film_id = ?");
+            ps.setLong(1, filmId);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

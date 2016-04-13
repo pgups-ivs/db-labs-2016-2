@@ -1,8 +1,10 @@
 package ru.pgups.ivs.rglv.labs.db.dao;
 
 import ru.pgups.ivs.rglv.labs.db.model.Actor;
+import ru.pgups.ivs.rglv.labs.db.model.FilmCategory;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,5 +41,37 @@ public class ActorsDAO extends AbstractCachingDAO<Actor> {
 
     public List<Actor> listForFilm(long id) {
         return this.listWithIdParameter(SELECT_FOR_FILM, id);
+    }
+
+    public void saveFilmActors(long filmId, List<Actor> actors) {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM film_actor WHERE film_id = ?");
+            ps.setLong(1, filmId);
+            ps.executeUpdate();
+
+            ps.close();
+
+            ps = connection.prepareStatement("INSERT INTO film_actor (film_id, actor_id) VALUES (?,?)");
+            for (Actor actor : actors) {
+                ps.setLong(1, filmId);
+                ps.setLong(2, actor.getId());
+                ps.addBatch();
+            }
+            ps.executeBatch();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteForFilm(long filmId) {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM film_actor WHERE film_id = ?");
+            ps.setLong(1, filmId);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

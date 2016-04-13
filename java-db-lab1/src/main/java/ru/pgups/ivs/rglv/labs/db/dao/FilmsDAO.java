@@ -15,8 +15,8 @@ public class FilmsDAO extends AbstractDAO<Film> {
 
     public FilmsDAO(DataSource dataSource) {
         super(dataSource, "SELECT * FROM FILM ORDER BY title", "SELECT * FROM FILM WHERE FILM_ID=?",
-                "INSERT INTO film VALUES(?,?)",
-                "UPDATE FILM set ... WHERE film_id = ?",
+                "INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost, rating) VALUES(?,?,?,?,?,?,?,?,?)",
+                "UPDATE FILM set title=?, description=?, release_year=?, language_id=?, rental_duration=?, rental_rate=?, length=?, replacement_cost=?, rating=? WHERE film_id = ?",
                 "DELETE FROM film WHERE film_id = ?");
     }
 
@@ -44,12 +44,38 @@ public class FilmsDAO extends AbstractDAO<Film> {
 
     @Override
     public long save(Film obj) throws SQLException {
-        throw new UnsupportedOperationException();
+        long id = super.save(obj);
+        actorsDAO.saveFilmActors(id, obj.getActors());
+        categoriesDAO.saveFilmCategories(id, obj.getCategories());
+        return id;
     }
 
     @Override
     protected int writeObject(Film obj, PreparedStatement ps, int idx) throws SQLException {
-        throw new UnsupportedOperationException();
+        ps.setString(idx++,obj.getTitle());
+        ps.setString(idx++, obj.getDescription());
+        ps.setInt(idx++, obj.getReleaseYear());
+
+        if (obj.getLanguage() != null) {
+            ps.setLong(idx++, obj.getLanguage().getId());
+        } else {
+            ps.setLong(idx++, 0);
+        }
+
+        ps.setInt(idx++, obj.getRentalDuration());
+        ps.setDouble(idx++, obj.getRentalRate());
+        ps.setInt(idx++, obj.getLenght());
+        ps.setDouble(idx++, obj.getReplacementCost());
+        ps.setString(idx++, obj.getMpaaRating());
+
+        return idx;
+    }
+
+    @Override
+    public void delete(long id) {
+        super.delete(id);
+        actorsDAO.deleteForFilm(id);
+        categoriesDAO.deleteForFilm(id);
     }
 
     public FilmCategoriesDAO getCategoriesDAO() {
