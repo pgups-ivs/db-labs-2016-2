@@ -6,8 +6,6 @@ import ru.pgups.ivs.rglv.labs.db.dao.FilmCategoriesDAO;
 import ru.pgups.ivs.rglv.labs.db.dao.FilmsDAO;
 import ru.pgups.ivs.rglv.labs.db.dao.LanguagesDAO;
 import ru.pgups.ivs.rglv.labs.db.model.Actor;
-import ru.pgups.ivs.rglv.labs.db.model.FilmCategory;
-import ru.pgups.ivs.rglv.labs.db.model.Language;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
