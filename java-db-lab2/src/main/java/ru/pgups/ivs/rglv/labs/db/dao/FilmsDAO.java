@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class FilmsDAO extends AbstractDAO<Film> {
     private FilmCategoriesDAO categoriesDAO;
@@ -68,6 +69,10 @@ public class FilmsDAO extends AbstractDAO<Film> {
         ps.setString(idx++, obj.getMpaaRating());
 
         return idx;
+    }
+
+    public List<Film> listForActor(long actorId) {
+        return this.listWithIdParameter("SELECT * FROM FILM f JOIN FILM_ACTOR fa USING (film_id) WHERE actor_id = ?", actorId);
     }
 
     @Override
