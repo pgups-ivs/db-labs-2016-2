@@ -38,6 +38,8 @@ public class FilmsServlet extends HttpServlet {
             out.print("</table>");
             out.print("</body>");
             out.print("</html>");
+        } else {
+            response.sendRedirect("film?id=" + request.getParameter("id"));
         }
     }
 }
