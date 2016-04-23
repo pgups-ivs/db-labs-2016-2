@@ -41,6 +41,5 @@ public class FilmCategory implements Identifiable {
 
         if (id != that.id) return false;
         return name.equals(that.name);
-
     }
 }

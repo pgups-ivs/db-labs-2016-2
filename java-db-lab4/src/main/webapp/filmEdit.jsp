@@ -28,6 +28,23 @@
             </c:forEach>
         </select>
     </div>
+
+    <div>
+        Категории:
+        <div style="margin-left: 32px;">
+            <c:forEach items="${film.categories}" var="cat">
+                <span>${cat.name}</span> <a href="/filmCategory?filmId=${film.id}&categoryId=${cat.id}" title="Убрать категорию" style="color:red;font-weight: bold;font-size:8px;">X</a> <br/>
+            </c:forEach>
+        </div>
+        Добавить категорию:
+        <select name="categoryId">
+            <option value="">- - - - -</option>
+            <c:forEach items="${requestScope.categories}" var="cat">
+                <option value="${cat.id}">${cat.name}</option>
+            </c:forEach>
+        </select>
+    </div>
+
     <input type="submit" value="Сохранить">
 </form>
 </body>

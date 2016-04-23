@@ -1,5 +1,6 @@
 package ru.pgups.ivs.rglv.labs.db.web;
 
+import ru.pgups.ivs.rglv.labs.db.dao.FilmCategoriesDAO;
 import ru.pgups.ivs.rglv.labs.db.dao.FilmsDAO;
 import ru.pgups.ivs.rglv.labs.db.dao.LanguagesDAO;
 import ru.pgups.ivs.rglv.labs.db.model.Actor;
@@ -37,6 +38,9 @@ public class FilmServlet extends HttpServlet {
         if (edit) {
             LanguagesDAO languagesDAO = (LanguagesDAO) this.getServletContext().getAttribute("languagesDAO");
             request.setAttribute("languages", languagesDAO.list());
+
+            FilmCategoriesDAO categoriesDAO = (FilmCategoriesDAO) this.getServletContext().getAttribute("categoriesDAO");
+            request.setAttribute("categories", categoriesDAO.list());
         }
 
         String route = edit ? "/filmEdit.jsp" : "/film.jsp";
@@ -47,6 +51,7 @@ public class FilmServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmsDAO filmsDAO = (FilmsDAO) this.getServletContext().getAttribute("filmsDAO");
         LanguagesDAO languagesDAO = (LanguagesDAO) this.getServletContext().getAttribute("languagesDAO");
+        FilmCategoriesDAO categoriesDAO = (FilmCategoriesDAO) this.getServletContext().getAttribute("categoriesDAO");
 
         Film film;
         if (request.getParameter("id") != null) {
@@ -80,6 +85,12 @@ public class FilmServlet extends HttpServlet {
         if (languageId != null) {
             long langId = Long.parseLong(languageId);
             film.setLanguage(languagesDAO.get(langId));
+        }
+
+        String categoryId = request.getParameter("categoryId");
+        if (categoryId != null && categoryId.trim().length() != 0) {
+            long catId = Long.parseLong(categoryId);
+            film.getCategories().add(categoriesDAO.get(catId));
         }
 
         try {

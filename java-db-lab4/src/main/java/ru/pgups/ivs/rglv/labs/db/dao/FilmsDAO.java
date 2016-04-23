@@ -75,6 +75,11 @@ public class FilmsDAO extends AbstractDAO<Film> {
         return this.listWithIdParameter("SELECT * FROM FILM f JOIN FILM_ACTOR fa USING (film_id) WHERE actor_id = ?", actorId);
     }
 
+
+    public void removeCategoryFromFilm(long filmId, long categoryId) {
+        categoriesDAO.deleteFromFilm(filmId, categoryId);
+    }
+
     @Override
     public void delete(long id) {
         super.delete(id);
@@ -105,4 +110,5 @@ public class FilmsDAO extends AbstractDAO<Film> {
     public void setLanguageDAO(LanguagesDAO languageDAO) {
         this.languageDAO = languageDAO;
     }
+
 }
