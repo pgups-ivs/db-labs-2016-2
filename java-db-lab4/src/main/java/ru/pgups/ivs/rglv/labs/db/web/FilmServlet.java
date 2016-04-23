@@ -1,9 +1,11 @@
 package ru.pgups.ivs.rglv.labs.db.web;
 
 import ru.pgups.ivs.rglv.labs.db.dao.FilmsDAO;
+import ru.pgups.ivs.rglv.labs.db.dao.LanguagesDAO;
 import ru.pgups.ivs.rglv.labs.db.model.Actor;
 import ru.pgups.ivs.rglv.labs.db.model.Film;
 import ru.pgups.ivs.rglv.labs.db.model.FilmCategory;
+import ru.pgups.ivs.rglv.labs.db.model.Language;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,13 +31,23 @@ public class FilmServlet extends HttpServlet {
             return;
         }
         request.setAttribute("film", film);
-        String route = request.getRequestURI().endsWith("edit") ? "/filmEdit.jsp" : "/film.jsp";
+
+        boolean edit = request.getRequestURI().endsWith("edit");
+
+        if (edit) {
+            LanguagesDAO languagesDAO = (LanguagesDAO) this.getServletContext().getAttribute("languagesDAO");
+            request.setAttribute("languages", languagesDAO.list());
+        }
+
+        String route = edit ? "/filmEdit.jsp" : "/film.jsp";
         this.getServletContext().getRequestDispatcher(route).forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FilmsDAO filmsDAO = (FilmsDAO) this.getServletContext().getAttribute("filmsDAO");
+        LanguagesDAO languagesDAO = (LanguagesDAO) this.getServletContext().getAttribute("languagesDAO");
+
         Film film;
         if (request.getParameter("id") != null) {
             long id = Long.parseLong(request.getParameter("id"));
@@ -62,6 +74,12 @@ public class FilmServlet extends HttpServlet {
         String releaseYear = request.getParameter("release_year");
         if (releaseYear != null) {
             film.setReleaseYear(Integer.parseInt(releaseYear));
+        }
+
+        String languageId = request.getParameter("languageId");
+        if (languageId != null) {
+            long langId = Long.parseLong(languageId);
+            film.setLanguage(languagesDAO.get(langId));
         }
 
         try {
