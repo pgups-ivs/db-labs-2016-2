@@ -1,5 +1,6 @@
 package ru.pgups.ivs.rglv.labs.db.dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 

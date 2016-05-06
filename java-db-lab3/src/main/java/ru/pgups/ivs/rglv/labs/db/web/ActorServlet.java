@@ -30,9 +30,27 @@ public class ActorServlet extends HttpServlet {
             response.sendError(404);
             return;
         }
+
+        response.setContentType("text/html;charset=UTF-8");
+
+        PrintWriter out = response.getWriter();
+
+        out.print(String.format("<html><head><title>Детальная информация об актере %s %s</title></head>", actor.getFirstName(), actor.getLastName()));
+
+        out.print("<body>");
+
+        out.print("<h1>" + actor.getFirstName() + " " + actor.getLastName() + "</h1>");
+
         List<Film> films = filmsDAO.listForActor(id);
-        request.setAttribute("actor", actor);
-        request.setAttribute("films", films);
-        this.getServletContext().getRequestDispatcher("/actor.jsp").forward(request, response);
+
+        if (films != null && films.size() > 0) {
+            out.print("<div><h3>Список фильмов:</h3>");
+            for (Film film : films) {
+                out.print(String.format("<a href='film?id=%d'>%s (%d)</a><br/>", film.getId(), film.getTitle(), film.getReleaseYear()));
+            }
+            out.print("</div>");
+        }
+
+        out.print("</body>");
     }
 }

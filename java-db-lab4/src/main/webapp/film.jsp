@@ -19,10 +19,6 @@
     </div>
 </c:if>
 
-<div>
-    <a href="film/edit?id=${film.id}">редактировать</a>
-</div>
-
 <c:if test="${not empty film.actors}">
     <div>
         <h1>Актеры фильма</h1>

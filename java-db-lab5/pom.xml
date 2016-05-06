@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
   <groupId>ru.pgups.ivs.labs.db</groupId>
-  <artifactId>java-db-lab3</artifactId>
+  <artifactId>java-db-lab5</artifactId>
   <version>0.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>java-db-lab3</name>
+  <name>java-db-lab5</name>
   <url>https://github.com/rglv/pgups-db-labs</url>
 
 
@@ -52,6 +52,16 @@
       <groupId>javax.servlet.jsp</groupId>
       <artifactId>jsp-api</artifactId>
       <version>2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>taglibs</groupId>
+      <artifactId>standard</artifactId>
+      <version>1.1.2</version>
     </dependency>
   </dependencies>
 </project>

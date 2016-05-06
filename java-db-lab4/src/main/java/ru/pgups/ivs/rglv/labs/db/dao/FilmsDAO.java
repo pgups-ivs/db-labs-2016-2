@@ -16,7 +16,7 @@ public class FilmsDAO extends AbstractDAO<Film> {
     public FilmsDAO(DataSource dataSource) {
         super(dataSource, "SELECT * FROM FILM ORDER BY title", "SELECT * FROM FILM WHERE FILM_ID=?",
                 "INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost, rating) VALUES(?,?,?,?,?,?,?,?,?)",
-                "UPDATE FILM set title=?, description=?, release_year=?, language_id=?, rental_duration=?, rental_rate=?, length=?, replacement_cost=?, rating= mpaa_rating(?) WHERE film_id = ?",
+                "UPDATE FILM set title=?, description=?, release_year=?, language_id=?, rental_duration=?, rental_rate=?, length=?, replacement_cost=?, rating=? WHERE film_id = ?",
                 "DELETE FROM film WHERE film_id = ?");
     }
 
@@ -66,18 +66,13 @@ public class FilmsDAO extends AbstractDAO<Film> {
         ps.setDouble(idx++, obj.getRentalRate());
         ps.setInt(idx++, obj.getLenght());
         ps.setDouble(idx++, obj.getReplacementCost());
-        ps.setObject(idx++, obj.getMpaaRating());
+        ps.setString(idx++, obj.getMpaaRating());
 
         return idx;
     }
 
     public List<Film> listForActor(long actorId) {
         return this.listWithIdParameter("SELECT * FROM FILM f JOIN FILM_ACTOR fa USING (film_id) WHERE actor_id = ?", actorId);
-    }
-
-
-    public void removeCategoryFromFilm(long filmId, long categoryId) {
-        categoriesDAO.deleteFromFilm(filmId, categoryId);
     }
 
     @Override
@@ -110,5 +105,4 @@ public class FilmsDAO extends AbstractDAO<Film> {
     public void setLanguageDAO(LanguagesDAO languageDAO) {
         this.languageDAO = languageDAO;
     }
-
 }

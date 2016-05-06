@@ -1,6 +1,7 @@
 package ru.pgups.ivs.rglv.labs.db.dao;
 
 import ru.pgups.ivs.rglv.labs.db.model.Actor;
+import ru.pgups.ivs.rglv.labs.db.model.FilmCategory;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

@@ -70,16 +70,4 @@ public class FilmCategoriesDAO extends AbstractCachingDAO<FilmCategory> {
             e.printStackTrace();
         }
     }
-
-    public void deleteFromFilm(long filmId, long categoryId) {
-        try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM film_category WHERE film_id = ? AND category_id = ?");
-            ps.setLong(1, filmId);
-            ps.setLong(2, categoryId);
-            ps.executeUpdate();
-            ps.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }
