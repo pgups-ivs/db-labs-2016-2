@@ -20,6 +20,16 @@
 
 Также можно скачать архив текущего состояния репозитория: https://github.com/pgups-ivs/db-labs-2016-2/archive/master.zip
 
+Для сборки примеров работ необходимо установить [JDK SE8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) и  [Maven](https://maven.apache.org/). Во время сборки maven будет скачивать необходимые jar-библиотеки из центрального репозитория. 
+
+Если вы планируете работу в offline режиме или собирать проект без maven, то в classpath понадобится добавлять несколько библиотек:
+
+  * [PostgreSQL JDBC driver](https://jdbc.postgresql.org/download/postgresql-9.4.1209.jar)
+  * Servlet и JSP API: [servlet-api.jar](http://central.maven.org/maven2/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar), [jsp-api.jar](http://central.maven.org/maven2/javax/servlet/jsp/jsp-api/2.2/jsp-api-2.2.jar), [jstl.jar](http://central.maven.org/maven2/jstl/jstl/1.2/jstl-1.2.jar), [standard.jar](http://central.maven.org/maven2/taglibs/standard/1.1.2/standard-1.1.2.jar)
+  * JUnit 4.12: [junit.jar](http://bit.ly/My9IXz), [hamcrest-core.jar](http://bit.ly/1gbl25b) (ссылки есть на сайте [junit](https://github.com/junit-team/junit4/wiki/Download-and-Install))
+
+Для запуска примеров web-приложений можно использовать любой Servlet-контейнер, поддерживающий версию 3.0: [Tomcat 8](http://tomcat.apache.org/download-80.cgi) или [Jetty](http://www.eclipse.org/jetty/).
+
 ## Создание объектной модели базы данных
 ...
 
