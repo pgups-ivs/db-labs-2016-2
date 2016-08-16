@@ -26,7 +26,7 @@
 
   * [PostgreSQL JDBC driver](https://jdbc.postgresql.org/download/postgresql-9.4.1209.jar)
   * Servlet и JSP API: [servlet-api.jar](http://central.maven.org/maven2/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar), [jsp-api.jar](http://central.maven.org/maven2/javax/servlet/jsp/jsp-api/2.2/jsp-api-2.2.jar), [jstl.jar](http://central.maven.org/maven2/jstl/jstl/1.2/jstl-1.2.jar), [standard.jar](http://central.maven.org/maven2/taglibs/standard/1.1.2/standard-1.1.2.jar)
-  * JUnit 4.12: [junit.jar](http://bit.ly/My9IXz), [hamcrest-core.jar](http://bit.ly/1gbl25b) (ссылки есть на сайте [junit](https://github.com/junit-team/junit4/wiki/Download-and-Install))
+  * JUnit 4.12: [junit.jar](http://central.maven.org/maven2/junit/junit/4.12/junit-4.12.jar), [hamcrest-core.jar](http://central.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar) (ссылки есть на сайте [junit](https://github.com/junit-team/junit4/wiki/Download-and-Install))
 
 Для запуска примеров web-приложений можно использовать любой Servlet-контейнер, поддерживающий версию 3.0: [Tomcat 8](http://tomcat.apache.org/download-80.cgi) или [Jetty](http://www.eclipse.org/jetty/).
 
