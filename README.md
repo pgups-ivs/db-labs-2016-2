@@ -54,7 +54,10 @@
 ...
 
 ## Использование технологии Servlet для обеспечения доступа к данным через Web
+
+[Servlets 3.1 tutorial](https://docs.oracle.com/javaee/7/tutorial/servlets.htm)
 ...
 
 ## Использование JSP и JSTL для создания Web-интерфейсов
+[JSP tutorial](http://docs.oracle.com/javaee/5/tutorial/doc/bnagx.html)
 ...
