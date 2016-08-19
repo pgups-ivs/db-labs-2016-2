@@ -51,6 +51,8 @@
 ...
 
 ## Создание классов доступа к БД в соответствии с шаблоном проектирования DAO (Data Access Object)
+[Tutorial - DAO design problems](http://tutorials.jenkov.com/java-persistence/dao-design-problems.html)
+
 ...
 
 ## Использование технологии Servlet для обеспечения доступа к данным через Web
