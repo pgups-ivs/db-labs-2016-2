@@ -48,6 +48,31 @@
 ...
 
 ## Создание объектной модели базы данных
+Для облегчения работы программы с данными, хранящимися в реляционной БД, нужно разработать набор классов, соответствующих схеме БД. Для каждой таблицы, представляющей сущность, в программе создаётся класс, единственной ответственностью которого является хранение данных. Распространённым обозначением для подобных классов является "POJO" - "Plain Old Java Object" - класс, соответствующий простейшим требованиям:
+* имеет конструктор без аргументов
+* все поля имеют спецификатор доступа private
+* для доступа к данным используются get- и set- методы с названиями, соответствующими спецификации Java Beans.
+
+В примере [java-db-2](java-db-lab2) классы модели можно найти в пакете [model](java-db-lab2/src/main/java/ru/pgups/ivs/rglv/labs/db/model). В качестве примера рассмотрим простейший класс, соответствующий таблице "Актёры":
+
+```java
+public class Actor {
+    private long id;
+    private String firstName;
+    private String lastName;
+
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
+
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+}
+```
+
+
 ...
 
 ## Создание классов доступа к БД в соответствии с шаблоном проектирования DAO (Data Access Object)
