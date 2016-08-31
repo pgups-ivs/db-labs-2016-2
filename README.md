@@ -30,6 +30,8 @@
 
 Для запуска примеров web-приложений можно использовать любой Servlet-контейнер, поддерживающий версию 3.0: [Tomcat 8](http://tomcat.apache.org/download-80.cgi) или [Jetty](http://www.eclipse.org/jetty/).
 
+Также, в качестве БД для примеров работ необходимо импортировать образ базы данных с сайта: http://www.postgresqltutorial.com/postgresql-sample-database/
+
 ## Использование технологии JDBC для взаимодействия с СУБД
 Для выполнения лабораторных работ необходимо ознакомиться с технологией JDBC: [JDBC Overview](https://docs.oracle.com/javase/tutorial/jdbc/overview/index.html), [JDBC Basics](https://docs.oracle.com/javase/tutorial/jdbc/basics/).
 
