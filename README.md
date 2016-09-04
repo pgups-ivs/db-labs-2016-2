@@ -114,6 +114,27 @@ public class ActorRole {
  * последовательное "закрытие" всех объектов, имеющих состояние: результата запроса, объекта-выражения и соединения с СУБД
 
 
+```java
+public class JdbcWithAutoclosable {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        Class.forName("org.postgresql.Driver");
+        try (
+                Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost/lab-dvd", "postgres", "postgres");
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM actor ORDER BY last_name, first_name")
+        ) {
+            while (resultSet.next()) {
+                System.out.println(
+                        String.format("%s %s (id: %03d)",
+                                resultSet.getString("last_name"), resultSet.getString("first_name"), resultSet.getInt("actor_id")
+                        )
+                );
+            }
+        }
+    }
+}
+```
+
 В примере показан явный вызов Class.forName(), который было необходимо выполнить при использовании версии JDBC 3.0. Для версии JDBC 4.x выполнять это действие не обязательно, менеджер драйверов самостоятельно сканирует классы в classpath и регистрирует обнаруженные драйверы.
 
 Для получения соединения с СУБД, менеджер драйверов передаёт URL со строкой соединения каждому из драйверов. Если драйвер способен обработать URL, то он установит соединение и вернёт настроенный объект класса Connection. 
@@ -122,6 +143,8 @@ public class ActorRole {
 ```java
 Connection connection = DriverManager.getConnection("jdbc:postgresql://host:port/db_name", "login", "password");
 ```
+
+
 
 ...
 
