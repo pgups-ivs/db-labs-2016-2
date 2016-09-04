@@ -74,6 +74,32 @@ public class Actor {
 }
 ```
 
+Этот класс не имеет никаких зависимостей от других, поэтому содержит только поля стандартных классов - две строки - фамилия и имя - и целочисленный идентификатор. Для классов, связанных с другими ассоциациями "многие-ко-многим", необходимо добавлять поля с коллекциями соответствующих типов. В случае ассоциации "много-к-одному" используется обычное поле-ссылка. Например, класс "Фильм" хранит списки актёров и жанров и ссылку на объект класса "Язык":
+
+```java
+public class Film {
+    private long id;
+
+    private String title;
+    private String description;
+    private int releaseYear;
+    private int lenght;
+...
+    private List<Actor> actors;
+    private List<FilmCategory> categories;
+    private Language language;
+...
+    public List<Actor> getActors() { return actors; }
+    public void setActors(List<Actor> actors) { this.actors = actors; }
+
+    public Language getLanguage() { return language; }
+    public void setLanguage(Language language) { this.language = language; }
+
+    public List<FilmCategory> getCategories() { return categories; }
+    public void setCategories(List<FilmCategory> categories) { this.categories = categories; }
+
+}
+```
 
 ...
 
